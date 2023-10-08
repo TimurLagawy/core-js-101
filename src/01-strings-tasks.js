@@ -154,7 +154,7 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-  let res;
+  let res = '';
   for (let i = 1; i < str.length - 1; i += 1) {
     if (str[i] !== '<' && str[i] !== '>') {
       res += str[i];
@@ -174,7 +174,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-  let res;
+  let res = '';
   for (let i = 0; i < str.length; i += 1) {
     res += str[i].toUpperCase();
   }
@@ -197,14 +197,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-  const array = [];
-  for (let i = 0; i < str.length; i += 1) {
-    if (str[i] === ';') {
-      array[i] += ',';
-    } else {
-      array[i] += str[i];
-    }
-  }
+  const array = str.split(';');
   return array;
 }
 
