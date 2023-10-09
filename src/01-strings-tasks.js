@@ -91,7 +91,7 @@ function extractNameFromTemplate(value) {
 function getFirstChar(value) {
   return value[0];
 }
-
+// *********************************************************************codewars
 /**
  * Removes a leading and trailing whitespace characters from string.
  *
@@ -138,8 +138,23 @@ function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  let res = '';
+  for (let i = 0; i < str.length; i += 1) {
+    let match = true;
+    for (let j = 0; j < value.length; j += 1) {
+      if (value[j] !== str[i + j]) {
+        match = false;
+        break;
+      }
+    }
+    if (!match) {
+      res += str[i];
+    } else {
+      i += value.length - 1; // Skip characters matched by the inner loop
+    }
+  }
+  return res;
 }
 
 /**
@@ -260,12 +275,26 @@ function getRectangleString(width, height) {
  *   'hello' => 'uryyb'
  *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
  *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
- *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
- *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
+ *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' =>
+ *   'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const original = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const remove = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let res = '';
+
+  for (let j = 0; j < str.length; j += 1) {
+    if (str[j] === ' ' || str[j] === '?' || str[j] === '!') {
+      res += str[j];
+    }
+    for (let i = 0; i < original.length; i += 1) {
+      if (str[j] === original[i]) {
+        res += remove[i];
+      }
+    }
+  }
+  return res;
 }
 
 /**
@@ -281,8 +310,14 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  let res;
+  if (typeof value === 'string' || value instanceof String) {
+    res = true;
+  } else {
+    res = false;
+  }
+  return res;
 }
 
 /**
@@ -309,8 +344,68 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  let res;
+  const arr = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === value) {
+      res = i;
+    }
+  }
+  return res;
 }
 
 module.exports = {
