@@ -77,7 +77,7 @@ function getArrayOfPositives(arr) {
   return results;
 }
 
-/** ***********************************codewars
+/**
  * Returns the array with strings only in the specified array (in original order)
  *
  * @param {array} arr
@@ -121,7 +121,7 @@ function removeFalsyValues(arr) {
   return res2;
 }
 
-/** ****************************codewars
+/**
  * Returns the array of uppercase strings from the specified array
  *
  * @param {array} arr
@@ -165,7 +165,7 @@ function insertItem(arr, item, index) {
   return arr.splice(index, 0, item); // удалит 0 элем, вставит с index элемент item
 }
 
-/**
+/**  *****************codewars
  * Returns the n first items of the specified array
  *
  * @param {array} arr
@@ -284,8 +284,11 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  if (arr === '') {
+    return [];
+  }
+  return Array.from(arr, (item, index) => (index + 1) * item);
 }
 
 /**
@@ -347,9 +350,20 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-  // let mass = arr.map(item => if);
-
-  arr.sort();
+  const massKey = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  arr.sort((a, b) => massKey.indexOf(a) - massKey.indexOf(b));
+  return arr;
 }
 
 /**
@@ -456,7 +470,12 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  return arr.map((a, b) => (a > b ? 1 : -1));
+  return arr.sort((a, b) => {
+    if (a.country === b.country) {
+      return a.city.localeCompare(b.city);
+    }
+    return a.country.localeCompare(b.country);
+  });
 }
 
 /**
@@ -494,7 +513,7 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
+function getIntervalArray(/* start, end Array.from({ length: 5 }, (v, k) => k); */) {
   throw new Error('Not implemented');
 }
 
@@ -509,8 +528,8 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return arr.sort();
 }
 
 /**
