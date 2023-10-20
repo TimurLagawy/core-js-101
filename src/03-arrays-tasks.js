@@ -285,10 +285,11 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  if (arr === '') {
+  /* if (arr === '') {
     return [];
   }
-  return Array.from(arr, (item, index) => (index + 1) * item);
+  return Array.from(arr, (item, index) => (index + 1) * item); */
+  return arr.flatMap((item, index) => Array(index + 1).fill(item));
 }
 
 /**
@@ -513,8 +514,10 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end Array.from({ length: 5 }, (v, k) => k); */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  // Array.from({ length: end - start + 1}, (v, k) => k); выдаёт массив от 0 до end
+  return Array.from({ length: end - start + 1 }, ($, index) => start + index);
+  // $ или _ вариант объявления переменной
 }
 
 /**
@@ -529,7 +532,10 @@ function getIntervalArray(/* start, end Array.from({ length: 5 }, (v, k) => k); 
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-  return arr.sort();
+  /* arr.sort();
+  const results = arr.filter((item) => item < 0);
+  return results; */
+  return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
 /**
