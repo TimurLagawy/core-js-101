@@ -292,7 +292,7 @@ function propagateItemsByPositionIndex(arr) {
   return arr.flatMap((item, index) => Array(index + 1).fill(item));
 }
 
-/**
+/** ****************************************************codewars
  * Returns the 3 largest numbers from the specified array
  *
  * @param {array} arr
@@ -572,8 +572,16 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  return array.reduce((resultMap, item) => {
+    const key = keySelector(item);
+    const value = valueSelector(item);
+
+    const valuesArray = resultMap.get(key) || [];
+    resultMap.set(key, [...valuesArray, value]);
+
+    return resultMap;
+  }, new Map());
 }
 
 /**
@@ -609,7 +617,17 @@ function selectMany(arr, childrenSelector) {
  */
 function getElementByIndexes(arr, indexes) {
   // return arr.indexOf(indexes);
-  return arr.find((item) => item.index === indexes);
+  // return arr.find((item) => item.index === indexes);
+  if (indexes.length === 0) {
+    return arr;
+  }
+
+  const [currentIndex, ...restIndexes] = indexes;
+
+  if (arr[currentIndex] === undefined) {
+    return undefined;
+  }
+  return getElementByIndexes(arr[currentIndex], restIndexes);
 }
 
 /**
