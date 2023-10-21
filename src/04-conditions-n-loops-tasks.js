@@ -276,8 +276,41 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  /* let checkDigit = 0;
+  const digits = String(ccn);
+
+  for (let i = digits.length - 2; i >= 0; i -= 1) {
+    let digit = Number(digits[i]);
+
+    if (i % 2 === 0) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+
+    checkDigit += digit;
+  }
+
+  return (10 - (checkDigit % 10)) % 10 === Number(digits[digits.length - 1]); */
+  let checkDigit = 0;
+  const digits = String(ccn).split('').map(Number);
+
+  for (let i = digits.length - 1; i >= 0; i -= 1) {
+    let digit = digits[i];
+
+    if ((digits.length - i) % 2 === 0) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+
+    checkDigit += digit;
+  }
+
+  return checkDigit % 10 === 0;
 }
 
 /**
@@ -319,8 +352,43 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  /* const mass = str.split('');
+  let res;
+  const br1 = mass.filter((item) => item === '[');
+  const br2 = mass.filter((item) => item === ']');
+  const br3 = mass.filter((item) => item === '(');
+  const br4 = mass.filter((item) => item === ')');
+  const br5 = mass.filter((item) => item === '{');
+  const br6 = mass.filter((item) => item === '}');
+  if (
+    br1.length === br2.length && br3.length === br4.length && br5.length === br6.length
+  ) {
+    res = true;
+  } else {
+    res = false;
+  }
+  return res;
+} */
+  const stack = [];
+  const openBrackets = ['[', '(', '{', '<'];
+  const closeBrackets = [']', ')', '}', '>'];
+
+  for (let i = 0; i < str.length; i += 1) {
+    const curBr = str[i];
+
+    if (openBrackets.includes(curBr)) {
+      stack.push(curBr);
+    } else if (closeBrackets.includes(curBr)) {
+      const lastOBr = stack.pop();
+
+      if (openBrackets.indexOf(lastOBr) !== closeBrackets.indexOf(curBr)) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
 }
 
 /**
@@ -343,8 +411,16 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let binary = '';
+  let num1 = num;
+  while (num1 > 0) {
+    const remainder = num1 % n;
+    binary = remainder + binary;
+    num1 = Math.floor(num1 / n);
+  }
+
+  return Number(binary);
 }
 
 /**
