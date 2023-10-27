@@ -500,7 +500,8 @@ function sortCitiesArray(arr) {
 function getIdentityMatrix(n) {
   const arr = [];
   arr.length = n;
-  return Array.from({ length: n }, () => arr.fill(1));
+  const mass = Array.from({ length: n }, () => arr.fill(0));
+  return mass.map((e, i) => e.map((elem, index) => (i !== index ? elem : 1)));
   // return Array.from({ length: n }, ($, i)
   // => Array.from({ length: n }, (_, j) => (i === j ? 1 : 0)));
 }
