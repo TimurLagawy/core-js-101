@@ -192,8 +192,18 @@ function isInsideCircle(c, p) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const arr = str.split('');
+  let symbol;
+  for (let i = 0; i < str.length; i += 1) {
+    if (arr.filter((item) => item === str[i]).length === 1) {
+      symbol = str[i];
+      break;
+    } else {
+      symbol = null;
+    }
+  }
+  return symbol;
 }
 
 /**
@@ -512,8 +522,22 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const res = [];
+
+  for (let i = 0; i < m1.length; i += 1) {
+    res[i] = [];
+
+    for (let j = 0; j < m2[0].length; j += 1) {
+      res[i][j] = 0;
+
+      for (let k = 0; k < m1[0].length; k += 1) {
+        res[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+
+  return res;
 }
 
 /**
