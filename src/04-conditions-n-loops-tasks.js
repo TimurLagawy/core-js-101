@@ -176,8 +176,9 @@ function doRectanglesOverlap(r1, r2) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(c, p) {
+  const line1 = Math.sqrt((c.center.x - p.x) ** 2 + (c.center.y - p.y) ** 2);
+  return c.radius > line1;
 }
 
 /**
@@ -353,8 +354,22 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const str = String(num);
+  let res = 0;
+  let res1 = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    res += Number(str[i]);
+  }
+  if (res < 10) {
+    res1 = res;
+  } else {
+    const str1 = String(res);
+    for (let i = 0; i < str1.length; i += 1) {
+      res1 += Number(str1[i]);
+    }
+  }
+  return res1;
 }
 
 /**
@@ -461,8 +476,22 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const peacies = pathes.map((path) => path.split('/'));
+
+  let resStr = '';
+  for (let i = 0; i < peacies[0].length; i += 1) {
+    const part = peacies[0][i];
+    if (peacies.every((pathParts) => pathParts[i] === part)) {
+      resStr += part;
+      if (i < peacies[0].length - 1) {
+        resStr += '/';
+      }
+    } else {
+      break;
+    }
+  }
+  return resStr;
 }
 
 /**
@@ -517,8 +546,42 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(p) {
+  let res;
+  if (p[0][0] === 'X' && p[0][1] === 'X' && p[0][2] === 'X') {
+    res = 'X';
+  } else if (p[1][0] === 'X' && p[1][1] === 'X' && p[1][2] === 'X') {
+    res = 'X';
+  } else if (p[2][0] === 'X' && p[2][1] === 'X' && p[2][2] === 'X') {
+    res = 'X';
+  } else if (p[0][0] === 'X' && p[1][0] === 'X' && p[2][0] === 'X') {
+    res = 'X';
+  } else if (p[0][1] === 'X' && p[1][1] === 'X' && p[2][1] === 'X') {
+    res = 'X';
+  } else if (p[0][2] === 'X' && p[1][2] === 'X' && p[2][2] === 'X') {
+    res = 'X';
+  } else if (p[0][0] === 'X' && p[1][1] === 'X' && p[2][2] === 'X') {
+    res = 'X';
+  } else if (p[2][0] === 'X' && p[1][1] === 'X' && p[0][2] === 'X') {
+    res = 'X';
+  } else if (p[0][0] === '0' && p[0][1] === '0' && p[0][2] === '0') {
+    res = '0';
+  } else if (p[1][0] === '0' && p[1][1] === '0' && p[1][2] === '0') {
+    res = '0';
+  } else if (p[2][0] === '0' && p[2][1] === '0' && p[2][2] === '0') {
+    res = '0';
+  } else if (p[0][0] === '0' && p[1][0] === '0' && p[2][0] === '0') {
+    res = '0';
+  } else if (p[0][1] === '0' && p[1][1] === '0' && p[2][1] === '0') {
+    res = '0';
+  } else if (p[0][2] === '0' && p[1][2] === '0' && p[2][2] === '0') {
+    res = '0';
+  } else if (p[0][0] === '0' && p[1][1] === '0' && p[2][2] === '0') {
+    res = '0';
+  } else if (p[2][0] === '0' && p[1][1] === '0' && p[0][2] === '0') {
+    res = '0';
+  }
+  return res;
 }
 
 module.exports = {
